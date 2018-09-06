@@ -33,7 +33,13 @@ class ExpatConan(ConanFile):
         cmake.build(target="install")
 
     def package(self):
-        self.copy("FindExpat.cmake", ".", ".")
+        #self.copy("FindExpat.cmake", ".", ".")
+        # Headers
+        #self.copy("*", dst="include", src=self.source_folder + "\libexpat\expat\lib", keep_path=True)
+        self.copy("*.h", dst="include", src=self.source_folder + "\libexpat\expat\lib", keep_path=True)
+        # Libraries
+        self.copy("*.dll", dst="bin", keep_path=False)
+        self.copy("*.lib", dst="lib", keep_path=False)
 
     def package_info(self):
         if self.settings.os == "Windows" and self.settings.build_type == "Debug":
