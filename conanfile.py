@@ -1,4 +1,5 @@
 from conans import ConanFile, CMake, tools
+import os
 
 class ExpatConan(ConanFile):
     name = "expat"
@@ -15,6 +16,7 @@ class ExpatConan(ConanFile):
 
     def source(self):
         self.run("git clone --depth 1 --branch R_2_2_6 %s" % self.source_url)
+        os.unlink('libexpat\\README.md')
 
     def build(self):
         #tools.patch(base_path = "libexpat", patch_file="patches/useConanFileAndIncreaseCMakeVersion.patch")
