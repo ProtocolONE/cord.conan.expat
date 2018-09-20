@@ -21,6 +21,8 @@ class ExpatConan(ConanFile):
     def build(self):
         #tools.patch(base_path = "libexpat", patch_file="patches/useConanFileAndIncreaseCMakeVersion.patch")
 
+        tools.replace_in_file("libexpat/expat/CMakeLists.txt", "project(expat)", "project(expat)\ninclude(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)\nconan_basic_setup()")
+        
         cmake = CMake(self, parallel=True)
 
         cmake_args = { "BUILD_doc" : "OFF",
